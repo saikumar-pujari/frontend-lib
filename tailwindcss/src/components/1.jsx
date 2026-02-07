@@ -1,76 +1,199 @@
-const C = () => {
+const ColorSpacingDemo = () => {
+  // Reusable section component
+  const Section = ({ title, children }) => (
+    <section className="my-8">
+      <h2 className="text-2xl font-extrabold text-center mb-6">{title}</h2>
+      {children}
+    </section>
+  );
+
+  // Generate color scale items
+  const ColorScale = ({ type, color, property = 'text' }) => {
+    const scales = [50, 100, 200, 300, 400, 500, 600, 700, 800, 900];
+    const propertyMap = {
+      text: 'text',
+      bg: 'bg',
+      border: 'border'
+    };
+    
+    return (
+      <div className="space-y-2">
+        {scales.map((scale) => {
+          const className = property === 'border' 
+            ? `border-${color}-${scale} border-4 p-2`
+            : `${propertyMap[property]}-${color}-${scale} p-2`;
+          
+          return (
+            <h3 key={scale} className={className}>
+              {property === 'text' ? `Text Color ${scale}` : 
+               property === 'bg' ? `Background ${scale}` : 
+               `Border ${scale}`}
+            </h3>
+          );
+        })}
+      </div>
+    );
+  };
+
   return (
-    <>
-    <h1 className='text-green-50'>hey its the 50</h1>
-    <h1 className='text-green-100'>hey its the 100</h1>
-    <h1 className='text-green-200'>hey its the 200</h1>
-    <h1 className='text-green-300'>hey its the 300</h1>
-    <h1 className='text-green-400'>hey its the 400</h1>
-    <h1 className='text-green-500'>hey its the 500</h1>
-    <h1 className='text-green-600'>hey its the 600</h1>
-    <h1 className='text-green-700'>hey its the 700</h1>
-    <h1 className='text-green-800'>hey its the 800</h1>
-    <h1 className='text-green-900'>hey its the 900</h1>
-    <br />
-    <h1 className='bg-red-50'>bg-50</h1>
-    <h1 className='bg-red-100'>bg-100</h1>
-    <h1 className='bg-red-200'>bg-200</h1>
-    <h1 className='bg-red-300'>bg-300</h1>
-    <h1 className='bg-red-400'>bg-400</h1>
-    <h1 className='bg-red-500'>bg-500</h1>
-    <h1 className='bg-red-600'>bg-600</h1>
-    <h1 className='bg-red-700'>bg-700</h1>
-    <h1 className='bg-red-800'>bg-800</h1>
-    <h1 className='bg-red-900'>bg-900</h1>
+    <div className="p-6 space-y-12 max-w-6xl mx-auto">
+      {/* Color Scales */}
+      <Section title="Text Color Scale (Green)">
+        <ColorScale type="text" color="green" property="text" />
+      </Section>
 
-    <h1 className='border-yellow-50 border-4'>border-50</h1>
-    <h1 className='border-yellow-100 border-4'>border-100</h1>
-    <h1 className='border-yellow-200 border-4'>border-200</h1>
-    <h1 className='border-yellow-300 border-4'>border-300</h1>
-    <h1 className='border-yellow-400 border-4'>border-400</h1>
-    <h1 className='border-yellow-500 border-4'>border-500</h1>
-    <h1 className='border-yellow-600 border-4'>border-600</h1>
-    <h1 className='border-yellow-700 border-4'>border-700</h1>
-    <h1 className='border-yellow-800 border-4'>border-800</h1>
-    <h1 className='border-yellow-900 border-4'>border-900</h1>
+      <Section title="Background Color Scale (Red)">
+        <ColorScale type="bg" color="red" property="bg" />
+      </Section>
 
-   <h1 className='font-extrabold place-items-center'>padding and margin</h1> 
-   <p className='p-2 m-10 bg-green-700 '>padding</p>
-   <p className='px-5 mx-20 bg-red-600'>left and right</p>
-   <p className='py-5 my-20 bg-red-900 border-4 border-black'>up and down</p>
-   <p className="pt-20 mt-6 bg-green-300 border-4 border-black">margin and padding top</p>
-   <p className="pb-20 mb-6 bg-green-300 border-4 border-black">margin and padding bottom</p>
-   <p className="pl-20 ml-3 bg-green-300 border-4 border-black">marging and padding left</p>
-   <p className="pr-20 mr-3 bg-green-300 border-4 border-black">margin and padding right</p>
+      <Section title="Border Color Scale (Yellow)">
+        <ColorScale type="border" color="yellow" property="border" />
+      </Section>
 
-   {/* extra use case */}
-   <p className='p-[2px] m-[2px]'>only 2px padding and margin</p>
-   <h1 className='font-extrabold place-items-center'>height and width</h1> 
-   <h1>-----------------------width---------------</h1>
-   <div className='bg-pink-200 w-10'>this is shit by the way</div>
-   <div className='bg-pink-200 w-100'>this is shit by the way</div>
-   <div className='bg-pink-200 min-w-5 max-w-20'>Min and max width</div>
-   <div className='bg-pink-200  w-1/2'>w-1/2</div>
-   <div className='bg-pink-200 w-1/3'>w-1/3</div>
-   <p className='w-200'>Lorem, ipsum dolor sit amet consectetur adipisicing elit. Minima sequi ex ratione quae aspernatur! Reiciendis enim voluptatem maiores nemo quia quisquam mollitia repudiandae similique, atque earum quod ipsa blanditiis quae aut adipisci recusandae? Incidunt necessitatibus reprehenderit placeat voluptates eligendi tenetur adipisci id doloribus vel assumenda. Accusantium minus, blanditiis ipsam vel quia alias mollitia molestias qui cum modi corporis sit praesentium voluptate sapiente aliquam ratione consequuntur odio aut officia tempore placeat perspiciatis incidunt! Rerum iure laboriosam consequuntur, natus ab pariatur porro recusandae ipsum? Quas atque, esse labore accusantium eligendi doloribus voluptatibus numquam eaque voluptas accusamus modi in quaerat. Fuga, laboriosam exercitationem.</p>
-   <p className='w-20'>Lorem ipsum dolor sit, amet consectetur adipisicing elit. Dolore, placeat.</p>
-   <p className='w-fit'>Lorem ipsum dolor sit amet, consectetur adipisicing elit. Est vel aut repudiandae beatae mollitia optio eligendi? Maxime mollitia dolor assumenda sed impedit quasi quam earum animi veritatis praesentium itaque, numquam, repudiandae nam molestiae hic reprehenderit esse quod? Sint provident incidunt reprehenderit odit, quia a laboriosam dolore? Eveniet, temporibus magni asperiores perspiciatis, quaerat doloribus autem natus, excepturi et recusandae est sed molestias aperiam corrupti ipsam iure vero voluptate dignissimos nobis suscipit nam dolores quod. Optio illum ad officiis obcaecati autem officia blanditiis magnam cum a perspiciatis explicabo, dignissimos voluptate vero nulla eligendi minus quibusdam aperiam dolorem commodi, odio nemo? Nesciunt, libero?</p>
-   <p className='w-full'>Lorem ipsum dolor sit amet consectetur adipisicing elit. Fuga non unde aliquam voluptatibus reiciendis repudiandae officiis tempora molestiae quam quas doloribus, ex excepturi omnis atque ut, reprehenderit dicta porro sed illum repellat aperiam sunt exercitationem iure. Possimus itaque repudiandae modi tempora culpa deleniti sint voluptatibus, voluptates nostrum aliquam facilis enim corrupti mollitia nulla saepe asperiores cupiditate distinctio rerum! Laboriosam, voluptates.</p>
-   <p className="bg-green-400 w-auto hover:bg-orange-500">Lorem ipsum dolor sit amet consectetur adipisicing elit. Inventore sit optio quo ratione natus voluptate a assumenda sapiente nobis doloremque, corporis et quasi magnam eius dicta ipsum deleniti ipsa autem.</p>
+      {/* Padding and Margin */}
+      <Section title="Padding & Margin">
+        <div className="space-y-4">
+          <div className="p-2 m-10 bg-green-700 text-white">
+            All sides padding (p-2) & margin (m-10)
+          </div>
+          
+          <div className="px-5 mx-20 bg-red-600 text-white">
+            Horizontal padding (px-5) & margin (mx-20)
+          </div>
+          
+          <div className="py-5 my-20 bg-red-900 text-white border-4 border-black">
+            Vertical padding (py-5) & margin (my-20)
+          </div>
+          
+          <div className="pt-20 mt-6 bg-green-300 border-4 border-black">
+            Top padding (pt-20) & margin (mt-6)
+          </div>
+          
+          <div className="pb-20 mb-6 bg-green-300 border-4 border-black">
+            Bottom padding (pb-20) & margin (mb-6)
+          </div>
+          
+          <div className="pl-20 ml-3 bg-green-300 border-4 border-black">
+            Left padding (pl-20) & margin (ml-3)
+          </div>
+          
+          <div className="pr-20 mr-3 bg-green-300 border-4 border-black">
+            Right padding (pr-20) & margin (mr-3)
+          </div>
+          
+          {/* Custom values */}
+          <div className="p-[2px] m-[2px] bg-blue-200 border border-blue-400">
+            Custom 2px padding & margin using arbitrary values
+          </div>
+        </div>
+      </Section>
 
-   <h1>-----------------------height---------------</h1>
-   <div className="h-10 bg-amber-300">code is given and height is 10</div>
-   <div className="h-100 bg-amber-900">code is given and height is 100</div>
-   <div className="h-1/2 bg-amber-500">code is given and height is 1/2</div>
-   <div className="h-screen bg-orange-600">code is for full screen</div>
-   <div className="h-full bg-orange-100">code is for height full </div>
-   <div className="h-screen bg-orange-100 max-h-20">max height is 20! </div>
-   {/* tip:- when we have same height and width use directly as size ok!! */}
-   <div className="w-50 h-50 bg-lime-500 rounded-full">circle</div>
-   <div className="size-50 bg-lime-500 rounded-full">circle</div>
+      {/* Width */}
+      <Section title="Width Utilities">
+        <div className="space-y-4">
+          <div className="bg-pink-200 w-10 p-2">Fixed width w-10</div>
+          
+          <div className="bg-pink-200 w-full max-w-md p-2">
+            Fixed width w-100 (use max-w for responsiveness)
+          </div>
+          
+          <div className="bg-pink-200 min-w-20 max-w-64 p-2">
+            Min width 20, max width 64
+          </div>
+          
+          <div className="bg-pink-200 w-1/2 p-2">
+            Half width (w-1/2)
+          </div>
+          
+          <div className="bg-pink-200 w-1/3 p-2">
+            One third width (w-1/3)
+          </div>
+          
+          <div className="bg-pink-100 w-full p-2 mb-4">
+            <p className="break-words">
+              Full width paragraph: Lorem, ipsum dolor sit amet consectetur adipisicing elit. 
+              Minima sequi ex ratione quae aspernatur! Reiciendis enim voluptatem maiores nemo 
+              quia quisquam mollitia repudiandae similique, atque earum quod ipsa blanditiis.
+            </p>
+          </div>
+          
+          <div className="bg-pink-100 w-20 p-2 mb-4">
+            <p className="break-words text-xs">
+              Narrow width (w-20): Lorem ipsum dolor sit, amet consectetur adipisicing elit.
+            </p>
+          </div>
+          
+          <div className="bg-pink-100 w-fit p-2 mb-4">
+            <p>
+              Fit content width (w-fit): This div fits its content width
+            </p>
+          </div>
+          
+          <div className="bg-pink-100 w-full p-2">
+            <p>
+              Full width (w-full): Lorem ipsum dolor sit amet consectetur adipisicing elit. 
+              Fuga non unde aliquam voluptatibus reiciendis repudiandae officiis tempora molestiae.
+            </p>
+          </div>
+          
+          <div className="bg-green-400 w-auto hover:bg-orange-500 transition-colors p-2 cursor-pointer">
+            Auto width (w-auto) with hover effect
+          </div>
+        </div>
+      </Section>
 
-    </>
-  )
-}
+      {/* Height */}
+      <Section title="Height Utilities">
+        <div className="space-y-4">
+          <div className="h-10 bg-amber-300 p-2 flex items-center">
+            Fixed height h-10
+          </div>
+          
+          <div className="h-32 bg-amber-900 text-white p-2 flex items-center">
+            Fixed height h-32 (h-100 doesn't exist in standard Tailwind)
+          </div>
+          
+          <div className="h-64 bg-amber-500 p-2 flex items-center">
+            Fixed height h-64
+          </div>
+          
+          <div className="h-screen bg-orange-600 text-white p-2 flex items-center justify-center">
+            Full viewport height (h-screen)
+          </div>
+          
+          <div className="h-full bg-orange-100 p-2 min-h-20 flex items-center">
+            Height full (h-full) - requires parent with defined height, using min-h-20 for visibility
+          </div>
+          
+          <div className="h-screen bg-orange-200 max-h-20 p-2 flex items-center overflow-hidden">
+            Max height constraint (max-h-20) on h-screen
+          </div>
+        </div>
+      </Section>
 
-export default C
+      {/* Size Utility */}
+      <Section title="Size Utility (Equal Width & Height)">
+        <p className="text-gray-700 mb-4">
+          Pro tip: When width and height are the same, use <code className="bg-gray-200 px-2 py-1 rounded">size-*</code> instead of separate w-* and h-*
+        </p>
+        <div className="flex flex-wrap gap-8 items-center">
+          <div>
+            <p className="text-sm mb-2 text-gray-600">Old way (w-50 h-50):</p>
+            <div className="w-32 h-32 bg-lime-500 rounded-full flex items-center justify-center text-white font-bold">
+              Circle
+            </div>
+          </div>
+          
+          <div>
+            <p className="text-sm mb-2 text-gray-600">Better way (size-50):</p>
+            <div className="size-32 bg-lime-500 rounded-full flex items-center justify-center text-white font-bold">
+              Circle
+            </div>
+          </div>
+        </div>
+      </Section>
+    </div>
+  );
+};
+
+export default ColorSpacingDemo;

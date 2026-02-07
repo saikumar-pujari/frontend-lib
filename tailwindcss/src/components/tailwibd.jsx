@@ -1,9 +1,11 @@
-import C from "./1"
+import ColorSpacingDemo from "./1"
+import TailwindDemo from "./2"
 
 const Tail = () => {
   return (
     <>
-    <C/>
+    <ColorSpacingDemo/>
+    <TailwindDemo/>
     </>
   )
 }
