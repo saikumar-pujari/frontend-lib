@@ -58,5 +58,25 @@ const PrimaryButton = ({ label }) => {
 
 export default PrimaryButton;
 ```
+# Tailwind CSS Basics
+
+This repository contains my hands-on practice and experiments while learning Tailwind CSS.
+
+The goal is to understand utilities, layout systems, and component building by writing real examples instead of only reading theory.
+
+## What you'll find here
+- Utility-first styling examples
+- Flexbox and Grid layouts
+- Responsive design practice
+- Small UI components
+
+## Having doubts?
+If something is confusing or unclear, the best place to get accurate and complete information is the official Tailwind CSS documentation.
+
+👉 https://tailwindcss.com/docs
+
+## Note
+This repo is purely for learning and exploration. Expect frequent updates and improvements.
+
 
 ## contact - hell no!! try to read the doc of offical tailwindcss
