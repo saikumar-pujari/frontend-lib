@@ -2,7 +2,7 @@ const C = () => {
   const toggleDarkMode = () => {
     document.documentElement.classList.toggle('dark');
   };
-    
+
   return (
     <div className="space-y-6 p-8">
       {/* Responsive backgrounds with breakpoints */}
@@ -14,7 +14,7 @@ const C = () => {
       <div className="bg-blue-300 p-sai rounded-lg">
         Custom padding using CSS variable (100px)
       </div>
-      
+
       <div className="bg-blue-300 p-[25.6px] rounded-lg">
         Arbitrary padding value (25.6px)
       </div>
@@ -34,7 +34,7 @@ const C = () => {
         Dark mode toggle demo - click button below
       </div>
 
-      <button 
+      <button
         className="bg-blue-500 text-white px-6 py-2 rounded-lg hover:bg-blue-600 transition-colors font-medium"
         onClick={toggleDarkMode}
       >
@@ -49,7 +49,25 @@ const C = () => {
         <button className="btn">Base Button</button>
         <button className="btn btn-blue">Blue Button</button>
       </div>
+      <>
+        <h1>hover on the class to change the group color indivualu and get a pop  up</h1>
+        <div className="group bg-blue-400">
+          <div className="group-hover:bg-red-600">hover-red</div>
+          <div className="group-hover:bg-pink-600">hover-pink</div>
+          <div className="group-hover:bg-amber-900">hover:amber</div>
+          <div className="group-hover:bg-green-600">hover-green</div>
+          <div className="group-hover:bg-yellow-600">hover-yellow</div>
+          <ul className="hidden bg-gray-500 text-white px-20 py-3 m-5  group-hover:block cursor-pointer">
+            <li>refresh</li>
+            <li>home</li>
+            <li>about</li>
+            <li>contact</li>
+          </ul>
+        </div>
+      </>
     </div>
+
+
   );
 };
 
