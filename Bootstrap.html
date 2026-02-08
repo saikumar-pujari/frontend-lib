@@ -1,0 +1,1231 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bootstrap Documentation - No Cap Edition 🔥</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:wght@400;700&family=Archivo+Black&display=swap" rel="stylesheet">
+    <style>
+        :root {
+            --primary: #ff6b35;
+            --secondary: #f7931e;
+            --dark: #1a1a2e;
+            --light: #f8f9fa;
+            --accent: #00d9ff;
+            --text: #2d2d2d;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Space Mono', monospace;
+            background: linear-gradient(135deg, var(--dark) 0%, #16213e 100%);
+            color: var(--light);
+            line-height: 1.7;
+            overflow-x: hidden;
+        }
+
+        .container-custom {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        header {
+            background: linear-gradient(45deg, var(--primary), var(--secondary));
+            padding: 60px 20px;
+            text-align: center;
+            position: relative;
+            overflow: hidden;
+            border-bottom: 4px solid var(--accent);
+        }
+
+        header::before {
+            content: '';
+            position: absolute;
+            top: -50%;
+            left: -50%;
+            width: 200%;
+            height: 200%;
+            background: repeating-linear-gradient(
+                45deg,
+                transparent,
+                transparent 10px,
+                rgba(255,255,255,0.05) 10px,
+                rgba(255,255,255,0.05) 20px
+            );
+            animation: slide 20s linear infinite;
+        }
+
+        @keyframes slide {
+            0% { transform: translate(0, 0); }
+            100% { transform: translate(50px, 50px); }
+        }
+
+        h1 {
+            font-family: 'Archivo Black', sans-serif;
+            font-size: 4rem;
+            margin-bottom: 10px;
+            position: relative;
+            z-index: 1;
+            text-transform: uppercase;
+            letter-spacing: 3px;
+            text-shadow: 4px 4px 0px rgba(0,0,0,0.3);
+        }
+
+        .subtitle {
+            font-size: 1.2rem;
+            position: relative;
+            z-index: 1;
+            color: var(--dark);
+            font-weight: bold;
+        }
+
+        nav {
+            background: rgba(26, 26, 46, 0.95);
+            padding: 20px;
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+            backdrop-filter: blur(10px);
+            border-bottom: 2px solid var(--accent);
+        }
+
+        nav a {
+            color: var(--light);
+            text-decoration: none;
+            padding: 10px 15px;
+            margin: 0 5px;
+            border-radius: 5px;
+            transition: all 0.3s ease;
+            display: inline-block;
+            font-weight: bold;
+        }
+
+        nav a:hover {
+            background: var(--primary);
+            transform: translateY(-2px);
+            box-shadow: 0 4px 10px rgba(255, 107, 53, 0.4);
+        }
+
+        section {
+            background: rgba(255, 255, 255, 0.05);
+            margin: 30px auto;
+            padding: 40px;
+            border-radius: 15px;
+            border-left: 5px solid var(--accent);
+            backdrop-filter: blur(10px);
+            max-width: 1200px;
+            transition: all 0.3s ease;
+        }
+
+        section:hover {
+            transform: translateX(10px);
+            box-shadow: -5px 5px 20px rgba(0, 217, 255, 0.2);
+        }
+
+        h2 {
+            font-family: 'Archivo Black', sans-serif;
+            color: var(--accent);
+            font-size: 2.5rem;
+            margin-bottom: 20px;
+            border-bottom: 3px solid var(--primary);
+            padding-bottom: 10px;
+            display: inline-block;
+        }
+
+        h3 {
+            color: var(--secondary);
+            font-size: 1.8rem;
+            margin-top: 30px;
+            margin-bottom: 15px;
+        }
+
+        .code-block {
+            background: #0d1117;
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            overflow-x: auto;
+            position: relative;
+            box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+        }
+
+        .code-block::before {
+            content: '< code >';
+            position: absolute;
+            top: -15px;
+            left: 20px;
+            background: var(--primary);
+            padding: 5px 15px;
+            border-radius: 5px;
+            font-size: 0.8rem;
+            font-weight: bold;
+        }
+
+        code {
+            color: #00ff88;
+            font-family: 'Space Mono', monospace;
+            font-size: 0.95rem;
+        }
+
+        .example-box {
+            background: rgba(255, 255, 255, 0.95);
+            color: var(--text);
+            border: 3px dashed var(--secondary);
+            border-radius: 10px;
+            padding: 25px;
+            margin: 20px 0;
+        }
+
+        .tip {
+            background: linear-gradient(135deg, var(--primary), var(--secondary));
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid var(--accent);
+            position: relative;
+            overflow: hidden;
+        }
+
+        .tip::before {
+            content: 'TIP:';
+            font-size: 1rem;
+            position: absolute;
+            right: 20px;
+            top: 50%;
+            transform: translateY(-50%);
+            opacity: 0.3;
+            font-weight: bold;
+        }
+
+        .warning {
+            background: #ff4757;
+            color: white;
+            padding: 20px;
+            border-radius: 10px;
+            margin: 20px 0;
+            border-left: 5px solid #2f3640;
+        }
+
+        .warning::before {
+            content: 'WARNING: ';
+            font-size: 1rem;
+            font-weight: bold;
+        }
+
+        .joke-box {
+            background: rgba(0, 217, 255, 0.1);
+            border: 2px solid var(--accent);
+            border-radius: 10px;
+            padding: 15px;
+            margin: 15px 0;
+            font-style: italic;
+        }
+
+        .joke-box::before {
+            content: 'NOTE: ';
+            font-weight: bold;
+        }
+
+        footer {
+            text-align: center;
+            padding: 40px;
+            background: rgba(26, 26, 46, 0.8);
+            margin-top: 50px;
+            border-top: 3px solid var(--primary);
+        }
+
+        table {
+            width: 100%;
+            margin: 20px 0;
+            border-collapse: collapse;
+        }
+
+        th {
+            background: var(--primary);
+            color: white;
+            padding: 15px;
+            text-align: left;
+        }
+
+        td {
+            background: rgba(255, 255, 255, 0.1);
+            padding: 15px;
+            border-bottom: 1px solid rgba(255, 255, 255, 0.1);
+        }
+
+        tr:hover td {
+            background: rgba(0, 217, 255, 0.1);
+        }
+
+        ::selection {
+            background: var(--accent);
+            color: var(--dark);
+        }
+
+        @media (max-width: 768px) {
+            h1 {
+                font-size: 2.5rem;
+            }
+            
+            section {
+                padding: 20px;
+            }
+            
+            nav a {
+                display: block;
+                margin: 5px 0;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <h1>Bootstrap Docs</h1>
+<p class="subtitle">the ultimate cheat sheet for making websites look bussin fr fr</p>
+    </header>
+
+    <nav>
+        <a href="#intro">Intro</a>
+        <a href="#grid">Grid System</a>
+        <a href="#components">Components</a>
+        <a href="#utilities">Utilities</a>
+        <a href="#forms">Forms</a>
+        <a href="#javascript">JavaScript</a>
+    </nav>
+
+    <div class="container-custom">
+        <!-- INTRODUCTION -->
+        <section id="intro">
+            <h2>What Even Is Bootstrap?</h2>
+            <p>
+                Alright bestie, so Bootstrap is basically this CSS framework that makes your websites look good without you having to cry over CSS for 6 hours straight. It's like Instagram filters but for websites - instant glow up.
+            </p>
+            <p>
+                Created by some legends at Twitter back in 2011 (yes, when it was still called Twitter, not X lol), Bootstrap has been carrying web developers ever since.
+            </p>
+
+            <div class="joke-box">
+                <strong>Fun fact:</strong> Bootstrap is called Bootstrap because it helps you "pull yourself up by your bootstraps" in web dev... or maybe because the creators were too tired to think of a better name idk
+            </div>
+
+            <h3>Getting Started (The Easy Way)</h3>
+            <p>Just slap this bad boy in your HTML <code>&lt;head&gt;</code> tag:</p>
+            
+            <div class="code-block">
+                <code>
+&lt;link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet"&gt;
+                </code>
+            </div>
+
+            <p>And this right before your closing <code>&lt;/body&gt;</code> tag if you want the JavaScript goodies:</p>
+            
+            <div class="code-block">
+                <code>
+&lt;script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"&gt;&lt;/script&gt;
+                </code>
+            </div>
+
+            <div class="tip">
+                <strong>Pro tip:</strong> Always use the CDN version when you're just vibing and prototyping. Download the full version when you're ready to deploy fr.
+            </div>
+        </section>
+
+        <!-- GRID SYSTEM -->
+        <section id="grid">
+            <h2>Grid System</h2>
+            <p>
+                The grid system is literally the backbone of Bootstrap. It's like Tetris but for website layouts. Everything is divided into 12 columns because apparently that's the magic number.
+            </p>
+
+            <h3>Container Types</h3>
+            <p>First, you gotta wrap your content in a container. Think of it as a cozy blanket for your divs:</p>
+
+            <div class="code-block">
+                <code>
+&lt;!-- Regular container - has max width --&gt;
+&lt;div class="container"&gt;
+    I'm centered and have margins!
+&lt;/div&gt;
+
+&lt;!-- Fluid container - full width always --&gt;
+&lt;div class="container-fluid"&gt;
+    I stretch across the whole screen like I'm doing yoga
+&lt;/div&gt;
+                </code>
+            </div>
+
+            <h3>The Row and Column System</h3>
+            <p>Rows go horizontal, columns go vertical. Revolutionary, I know. Here's the tea:</p>
+
+            <div class="code-block">
+                <code>
+&lt;div class="container"&gt;
+    &lt;div class="row"&gt;
+        &lt;div class="col"&gt;
+            Column 1 - Auto width, sharing space equally
+        &lt;/div&gt;
+        &lt;div class="col"&gt;
+            Column 2 - We're twins!
+        &lt;/div&gt;
+        &lt;div class="col"&gt;
+            Column 3 - Triplets actually
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+            </div>
+
+            <h3>Specific Column Widths</h3>
+            <p>Remember, Bootstrap uses 12 columns. So <code>col-6</code> = half the width, <code>col-4</code> = one-third, etc.</p>
+
+            <div class="code-block">
+                <code>
+&lt;div class="row"&gt;
+    &lt;div class="col-8"&gt;
+        I'm taking up 8 out of 12 columns (main content vibes)
+    &lt;/div&gt;
+    &lt;div class="col-4"&gt;
+        I got the remaining 4 (sidebar energy)
+    &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+            </div>
+
+            <div class="joke-box">
+                <strong>Why 12 columns?</strong> Because 12 is divisible by 2, 3, 4, and 6. It's the people pleaser of numbers. Unlike 13, which is just awkward at parties.
+            </div>
+
+            <h3>Responsive Breakpoints</h3>
+            <p>Make your site look good on literally everything from a smart fridge to an IMAX screen:</p>
+
+            <table>
+                <thead>
+                    <tr>
+                        <th>Breakpoint</th>
+                        <th>Class</th>
+                        <th>Width</th>
+                        <th>Vibe Check</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Extra Small</td>
+                        <td>col-</td>
+                        <td>&lt; 576px</td>
+                        <td>Phones (texting your crush)</td>
+                    </tr>
+                    <tr>
+                        <td>Small</td>
+                        <td>col-sm-</td>
+                        <td>≥ 576px</td>
+                        <td>Phones (scrolling TikTok)</td>
+                    </tr>
+                    <tr>
+                        <td>Medium</td>
+                        <td>col-md-</td>
+                        <td>≥ 768px</td>
+                        <td>Tablets (pretending to work)</td>
+                    </tr>
+                    <tr>
+                        <td>Large</td>
+                        <td>col-lg-</td>
+                        <td>≥ 992px</td>
+                        <td>Laptops (actual work maybe)</td>
+                    </tr>
+                    <tr>
+                        <td>Extra Large</td>
+                        <td>col-xl-</td>
+                        <td>≥ 1200px</td>
+                        <td>Desktops (gaming setup)</td>
+                    </tr>
+                    <tr>
+                        <td>XXL</td>
+                        <td>col-xxl-</td>
+                        <td>≥ 1400px</td>
+                        <td>Ultrawide (flex mode)</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <div class="code-block">
+                <code>
+&lt;div class="row"&gt;
+    &lt;div class="col-12 col-md-6 col-lg-4"&gt;
+        On phones: full width
+        On tablets: half width  
+        On desktops: one-third width
+        (I'm literally a chameleon)
+    &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+            </div>
+
+            <div class="warning">
+                <strong>Common L:</strong> Forgetting to wrap columns in a row div. Bootstrap will ghost you if you do this. The columns need their row parent or things get messy real quick.
+            </div>
+        </section>
+
+        <!-- COMPONENTS -->
+        <section id="components">
+            <h2>Components</h2>
+            <p>This is where Bootstrap really slaps. Pre-made components that look clean af.</p>
+
+            <h3>Buttons</h3>
+            <p>Buttons are like the sprinkles on a cupcake - they make everything better:</p>
+
+            <div class="code-block">
+                <code>
+&lt;!-- Basic buttons with different vibes --&gt;
+&lt;button class="btn btn-primary"&gt;Main Character Energy&lt;/button&gt;
+&lt;button class="btn btn-secondary"&gt;Supporting Role&lt;/button&gt;
+&lt;button class="btn btn-success"&gt;Let's Gooo&lt;/button&gt;
+&lt;button class="btn btn-danger"&gt;Danger Zone&lt;/button&gt;
+&lt;button class="btn btn-warning"&gt;Proceed with Caution&lt;/button&gt;
+&lt;button class="btn btn-info"&gt;Fun Fact&lt;/button&gt;
+
+&lt;!-- Size variations --&gt;
+&lt;button class="btn btn-primary btn-lg"&gt;Chonky Button&lt;/button&gt;
+&lt;button class="btn btn-primary"&gt;Normal Button&lt;/button&gt;
+&lt;button class="btn btn-primary btn-sm"&gt;Smol Button&lt;/button&gt;
+
+&lt;!-- Outline style (for that minimalist aesthetic) --&gt;
+&lt;button class="btn btn-outline-primary"&gt;Ghost Mode&lt;/button&gt;
+                </code>
+            </div>
+
+            <div class="example-box">
+                <button class="btn btn-primary">Main Character Energy</button>
+                <button class="btn btn-success">Let's Gooo</button>
+                <button class="btn btn-danger">Danger Zone</button>
+                <button class="btn btn-outline-primary">Ghost Mode</button>
+            </div>
+
+            <h3>Navbar</h3>
+            <p>Every website needs a navbar. It's the law (probably):</p>
+
+            <div class="code-block">
+                <code>
+&lt;nav class="navbar navbar-expand-lg navbar-dark bg-dark"&gt;
+    &lt;div class="container-fluid"&gt;
+        &lt;a class="navbar-brand" href="#"&gt;My Sick Website&lt;/a&gt;
+        &lt;button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav"&gt;
+            &lt;span class="navbar-toggler-icon"&gt;&lt;/span&gt;
+        &lt;/button&gt;
+        &lt;div class="collapse navbar-collapse" id="navbarNav"&gt;
+            &lt;ul class="navbar-nav"&gt;
+                &lt;li class="nav-item"&gt;
+                    &lt;a class="nav-link active" href="#"&gt;Home&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class="nav-item"&gt;
+                    &lt;a class="nav-link" href="#"&gt;About&lt;/a&gt;
+                &lt;/li&gt;
+                &lt;li class="nav-item"&gt;
+                    &lt;a class="nav-link" href="#"&gt;Contact&lt;/a&gt;
+                &lt;/li&gt;
+            &lt;/ul&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/nav&gt;
+                </code>
+            </div>
+
+            <h3>Cards</h3>
+            <p>Cards are basically the building blocks of modern web design. Everyone uses them:</p>
+
+            <div class="code-block">
+                <code>
+&lt;div class="card" style="width: 18rem;"&gt;
+    &lt;img src="cat.jpg" class="card-img-top" alt="A distinguished cat"&gt;
+    &lt;div class="card-body"&gt;
+        &lt;h5 class="card-title"&gt;Mr. Whiskers&lt;/h5&gt;
+        &lt;p class="card-text"&gt;
+            Professional napper and part-time chaos agent. 
+            Enjoys knocking things off tables.
+        &lt;/p&gt;
+        &lt;a href="#" class="btn btn-primary"&gt;Hire This Cat&lt;/a&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+            </div>
+
+            <div class="joke-box">
+                <strong>Real talk:</strong> If your website doesn't have at least 3 cards, are you even designing in 2024? Cards are the avocado toast of web components.
+            </div>
+
+            <h3>Alerts</h3>
+            <p>For when you need to tell users something important (or not so important):</p>
+
+            <div class="code-block">
+                <code>
+&lt;div class="alert alert-success" role="alert"&gt;
+    You did it! Gold star for you
+&lt;/div&gt;
+
+&lt;div class="alert alert-warning" role="alert"&gt;
+    Hmm... that's sus ngl
+&lt;/div&gt;
+
+&lt;div class="alert alert-danger" role="alert"&gt;
+    ERROR 404: Motivation not found
+&lt;/div&gt;
+
+&lt;!-- Dismissible alert --&gt;
+&lt;div class="alert alert-info alert-dismissible fade show" role="alert"&gt;
+    This message will self-destruct
+    &lt;button type="button" class="btn-close" data-bs-dismiss="alert"&gt;&lt;/button&gt;
+&lt;/div&gt;
+                </code>
+            </div>
+
+            <h3>Modals</h3>
+            <p>Pop-ups but make it elegant</p>
+
+            <div class="code-block">
+                <code>
+&lt;!-- Button trigger --&gt;
+&lt;button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#myModal"&gt;
+    Click me if you dare
+&lt;/button&gt;
+
+&lt;!-- Modal --&gt;
+&lt;div class="modal fade" id="myModal" tabindex="-1"&gt;
+    &lt;div class="modal-dialog"&gt;
+        &lt;div class="modal-content"&gt;
+            &lt;div class="modal-header"&gt;
+                &lt;h5 class="modal-title"&gt;You've Been Warned&lt;/h5&gt;
+                &lt;button type="button" class="btn-close" data-bs-dismiss="modal"&gt;&lt;/button&gt;
+            &lt;/div&gt;
+            &lt;div class="modal-body"&gt;
+                This is a modal. It's like a pop-up but people don't hate it as much.
+            &lt;/div&gt;
+            &lt;div class="modal-footer"&gt;
+                &lt;button type="button" class="btn btn-secondary" data-bs-dismiss="modal"&gt;Escape&lt;/button&gt;
+                &lt;button type="button" class="btn btn-primary"&gt;Stay Trapped&lt;/button&gt;
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+            </div>
+
+            <h3>Badges</h3>
+            <p>Little tags for flex:</p>
+
+            <div class="code-block">
+                <code>
+&lt;h1&gt;Notifications &lt;span class="badge bg-danger"&gt;99+&lt;/span&gt;&lt;/h1&gt;
+&lt;button class="btn btn-primary"&gt;
+    Messages &lt;span class="badge bg-light text-dark"&gt;4&lt;/span&gt;
+&lt;/button&gt;
+                </code>
+            </div>
+        </section>
+
+        <!-- UTILITIES -->
+        <section id="utilities">
+            <h2>Utility Classes</h2>
+            <p>These are like the Swiss Army knife of Bootstrap. Quick classes for quick styling.</p>
+
+            <h3>Spacing (Margin & Padding)</h3>
+            <p>The format is: <code>{property}{sides}-{size}</code></p>
+            <p>Where:</p>
+            <ul style="list-style-position: inside;">
+                <li><strong>property:</strong> m (margin) or p (padding)</li>
+                <li><strong>sides:</strong> t (top), b (bottom), s (start/left), e (end/right), x (left+right), y (top+bottom), or blank (all)</li>
+                <li><strong>size:</strong> 0, 1, 2, 3, 4, 5 (or auto for margin)</li>
+            </ul>
+
+            <div class="code-block">
+                <code>
+&lt;div class="mt-3"&gt;margin-top: medium&lt;/div&gt;
+&lt;div class="p-5"&gt;padding: extra thicc&lt;/div&gt;
+&lt;div class="mx-auto"&gt;margin-left and margin-right: auto (centered!)&lt;/div&gt;
+&lt;div class="my-4"&gt;margin top and bottom: large&lt;/div&gt;
+                </code>
+            </div>
+
+            <div class="tip">
+                <strong>Pro tip:</strong> Use <code>mx-auto</code> to center block elements. It's giving main character energy.
+            </div>
+
+            <h3>Text Utilities</h3>
+            <p>Make your text do things:</p>
+
+            <div class="code-block">
+                <code>
+&lt;!-- Alignment --&gt;
+&lt;p class="text-start"&gt;Left aligned (or is it start? we're inclusive now)&lt;/p&gt;
+&lt;p class="text-center"&gt;Perfectly balanced, as all things should be&lt;/p&gt;
+&lt;p class="text-end"&gt;Right aligned (end aligned actually)&lt;/p&gt;
+
+&lt;!-- Colors --&gt;
+&lt;p class="text-primary"&gt;Primary blue vibes&lt;/p&gt;
+&lt;p class="text-success"&gt;Green means go&lt;/p&gt;
+&lt;p class="text-danger"&gt;Red flag energy&lt;/p&gt;
+&lt;p class="text-muted"&gt;I'm just here, don't mind me&lt;/p&gt;
+
+&lt;!-- Transform --&gt;
+&lt;p class="text-lowercase"&gt;NO CAPS LOCK HERE&lt;/p&gt;
+&lt;p class="text-uppercase"&gt;screaming in html&lt;/p&gt;
+&lt;p class="text-capitalize"&gt;every word gets a capital&lt;/p&gt;
+
+&lt;!-- Weight --&gt;
+&lt;p class="fw-bold"&gt;BOLD STATEMENTS&lt;/p&gt;
+&lt;p class="fw-light"&gt;whisper mode&lt;/p&gt;
+&lt;p class="fst-italic"&gt;fancy and tilted&lt;/p&gt;
+                </code>
+            </div>
+
+            <h3>Display & Visibility</h3>
+            <p>Show and hide things like a magician:</p>
+
+            <div class="code-block">
+                <code>
+&lt;!-- Display types --&gt;
+&lt;div class="d-block"&gt;I'm a block element&lt;/div&gt;
+&lt;div class="d-inline"&gt;Inline gang&lt;/div&gt;
+&lt;div class="d-flex"&gt;Flexbox activated&lt;/div&gt;
+&lt;div class="d-grid"&gt;Grid mode unlocked&lt;/div&gt;
+
+&lt;!-- Hide on specific screens --&gt;
+&lt;div class="d-none d-md-block"&gt;
+    Hidden on mobile, visible on tablet+
+&lt;/div&gt;
+
+&lt;div class="d-md-none"&gt;
+    Only visible on mobile
+&lt;/div&gt;
+                </code>
+            </div>
+
+            <h3>Flexbox Utilities</h3>
+            <p>Because flexbox is elite for layouts:</p>
+
+            <div class="code-block">
+                <code>
+&lt;div class="d-flex justify-content-center"&gt;
+    I'm centered horizontally
+&lt;/div&gt;
+
+&lt;div class="d-flex justify-content-between"&gt;
+    &lt;div&gt;Left side&lt;/div&gt;
+    &lt;div&gt;Right side&lt;/div&gt;
+&lt;/div&gt;
+
+&lt;div class="d-flex align-items-center" style="height: 200px;"&gt;
+    I'm centered vertically
+&lt;/div&gt;
+
+&lt;div class="d-flex flex-column"&gt;
+    &lt;div&gt;Stacked&lt;/div&gt;
+    &lt;div&gt;Like&lt;/div&gt;
+    &lt;div&gt;Pancakes&lt;/div&gt;
+&lt;/div&gt;
+                </code>
+            </div>
+
+            <div class="joke-box">
+                <strong>Flexbox before Bootstrap:</strong> "Why won't you CENTER?!" *cries in CSS*<br>
+                <strong>Flexbox with Bootstrap:</strong> <code>d-flex justify-content-center</code> *chef's kiss*
+            </div>
+
+            <h3>Colors</h3>
+            <p>Paint your components:</p>
+
+            <div class="code-block">
+                <code>
+&lt;!-- Background colors --&gt;
+&lt;div class="bg-primary text-white"&gt;Primary background&lt;/div&gt;
+&lt;div class="bg-success text-white"&gt;Success background&lt;/div&gt;
+&lt;div class="bg-danger text-white"&gt;Danger background&lt;/div&gt;
+&lt;div class="bg-dark text-white"&gt;Dark mode activated&lt;/div&gt;
+&lt;div class="bg-light text-dark"&gt;Light mode (ew)&lt;/div&gt;
+
+&lt;!-- Border colors --&gt;
+&lt;div class="border border-primary"&gt;Blue border&lt;/div&gt;
+&lt;div class="border border-5 border-danger"&gt;THICC red border&lt;/div&gt;
+                </code>
+            </div>
+
+            <h3>Sizing</h3>
+            <p>Control your element's size:</p>
+
+            <div class="code-block">
+                <code>
+&lt;!-- Width --&gt;
+&lt;div class="w-25"&gt;25% width&lt;/div&gt;
+&lt;div class="w-50"&gt;50% width (perfectly balanced)&lt;/div&gt;
+&lt;div class="w-75"&gt;75% width&lt;/div&gt;
+&lt;div class="w-100"&gt;100% width (full send)&lt;/div&gt;
+
+&lt;!-- Height --&gt;
+&lt;div class="h-25"&gt;25% height&lt;/div&gt;
+&lt;div class="h-50"&gt;50% height&lt;/div&gt;
+
+&lt;!-- Max width --&gt;
+&lt;div class="mw-100"&gt;max-width: 100%&lt;/div&gt;
+                </code>
+            </div>
+        </section>
+
+        <!-- FORMS -->
+        <section id="forms">
+            <h2>Forms</h2>
+            <p>Forms don't have to be ugly. Bootstrap's got you covered:</p>
+
+            <h3>Basic Form</h3>
+            <div class="code-block">
+                <code>
+&lt;form&gt;
+    &lt;div class="mb-3"&gt;
+        &lt;label for="email" class="form-label"&gt;Email address&lt;/label&gt;
+        &lt;input type="email" class="form-control" id="email" placeholder="you@example.com"&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="mb-3"&gt;
+        &lt;label for="password" class="form-label"&gt;Password&lt;/label&gt;
+        &lt;input type="password" class="form-control" id="password" placeholder="supersecret123"&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="mb-3 form-check"&gt;
+        &lt;input type="checkbox" class="form-check-input" id="remember"&gt;
+        &lt;label class="form-check-label" for="remember"&gt;
+            Remember me (risky but convenient)
+        &lt;/label&gt;
+    &lt;/div&gt;
+    
+    &lt;button type="submit" class="btn btn-primary"&gt;Submit&lt;/button&gt;
+&lt;/form&gt;
+                </code>
+            </div>
+
+            <h3>Form Controls</h3>
+            <div class="code-block">
+                <code>
+&lt;!-- Text input --&gt;
+&lt;input type="text" class="form-control" placeholder="Type something"&gt;
+
+&lt;!-- Textarea --&gt;
+&lt;textarea class="form-control" rows="3" placeholder="Write a novel"&gt;&lt;/textarea&gt;
+
+&lt;!-- Select dropdown --&gt;
+&lt;select class="form-select"&gt;
+    &lt;option selected&gt;Choose your fighter&lt;/option&gt;
+    &lt;option value="1"&gt;Option 1&lt;/option&gt;
+    &lt;option value="2"&gt;Option 2&lt;/option&gt;
+    &lt;option value="3"&gt;Option 3&lt;/option&gt;
+&lt;/select&gt;
+
+&lt;!-- File input --&gt;
+&lt;input class="form-control" type="file"&gt;
+
+&lt;!-- Range slider --&gt;
+&lt;label class="form-label"&gt;How much do you love Bootstrap?&lt;/label&gt;
+&lt;input type="range" class="form-range" min="0" max="10" step="1"&gt;
+                </code>
+            </div>
+
+            <h3>Input Sizes</h3>
+            <div class="code-block">
+                <code>
+&lt;input class="form-control form-control-lg" placeholder="Large input"&gt;
+&lt;input class="form-control" placeholder="Normal input"&gt;
+&lt;input class="form-control form-control-sm" placeholder="Smol input"&gt;
+                </code>
+            </div>
+
+            <h3>Validation States</h3>
+            <div class="code-block">
+                <code>
+&lt;!-- Valid input --&gt;
+&lt;input type="text" class="form-control is-valid" placeholder="Good job!"&gt;
+&lt;div class="valid-feedback"&gt;
+    Looks good! Nice work
+&lt;/div&gt;
+
+&lt;!-- Invalid input --&gt;
+&lt;input type="text" class="form-control is-invalid" placeholder="Oops..."&gt;
+&lt;div class="invalid-feedback"&gt;
+    Nah fam, try again
+&lt;/div&gt;
+                </code>
+            </div>
+
+            <div class="warning">
+                <strong>Don't forget:</strong> Always add labels to your inputs! It's not just for looks - it's for accessibility. Screen readers need labels to tell users what each input is for. Be inclusive, besties.
+            </div>
+        </section>
+
+        <!-- JAVASCRIPT -->
+        <section id="javascript">
+            <h2>JavaScript Components</h2>
+            <p>The interactive stuff that makes your site feel alive:</p>
+
+            <h3>Collapse</h3>
+            <p>Hide and seek but make it web dev:</p>
+
+            <div class="code-block">
+                <code>
+&lt;button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample"&gt;
+    Click to reveal secrets
+&lt;/button&gt;
+
+&lt;div class="collapse" id="collapseExample"&gt;
+    &lt;div class="card card-body"&gt;
+        Boo! Bet you didn't expect to see me here.
+    &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+            </div>
+
+            <h3>Accordion</h3>
+            <p>Collapsible sections but fancy:</p>
+
+            <div class="code-block">
+                <code>
+&lt;div class="accordion" id="faqAccordion"&gt;
+    &lt;div class="accordion-item"&gt;
+        &lt;h2 class="accordion-header"&gt;
+            &lt;button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#q1"&gt;
+                Is Bootstrap easy to learn?
+            &lt;/button&gt;
+        &lt;/h2&gt;
+        &lt;div id="q1" class="accordion-collapse collapse show" data-bs-parent="#faqAccordion"&gt;
+            &lt;div class="accordion-body"&gt;
+                Literally yes. If you can read this, you can use Bootstrap.
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;div class="accordion-item"&gt;
+        &lt;h2 class="accordion-header"&gt;
+            &lt;button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#q2"&gt;
+                Will this make me a better developer?
+            &lt;/button&gt;
+        &lt;/h2&gt;
+        &lt;div id="q2" class="accordion-collapse collapse" data-bs-parent="#faqAccordion"&gt;
+            &lt;div class="accordion-body"&gt;
+                I mean, knowing tools is good, but understanding CSS fundamentals is better. Balance, young padawan.
+            &lt;/div&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+            </div>
+
+            <h3>Tooltips</h3>
+            <p>Hover for wisdom:</p>
+
+            <div class="code-block">
+                <code>
+&lt;!-- First, initialize tooltips in your JavaScript --&gt;
+&lt;script&gt;
+    const tooltips = document.querySelectorAll('[data-bs-toggle="tooltip"]');
+    tooltips.forEach(t => new bootstrap.Tooltip(t));
+&lt;/script&gt;
+
+&lt;!-- Then use them --&gt;
+&lt;button type="button" class="btn btn-secondary" 
+        data-bs-toggle="tooltip" 
+        data-bs-placement="top" 
+        title="I'm a tooltip!"&gt;
+    Hover over me
+&lt;/button&gt;
+                </code>
+            </div>
+
+            <h3>Toast Notifications</h3>
+            <p>Little pop-up messages (not the breakfast kind):</p>
+
+            <div class="code-block">
+                <code>
+&lt;div class="toast" role="alert"&gt;
+    &lt;div class="toast-header"&gt;
+        &lt;strong class="me-auto"&gt;Notification&lt;/strong&gt;
+        &lt;small&gt;just now&lt;/small&gt;
+        &lt;button type="button" class="btn-close" data-bs-dismiss="toast"&gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="toast-body"&gt;
+        Your code compiled successfully! (First try?? Impossible.)
+    &lt;/div&gt;
+&lt;/div&gt;
+
+&lt;!-- Trigger with JavaScript --&gt;
+&lt;script&gt;
+    const toast = new bootstrap.Toast(document.querySelector('.toast'));
+    toast.show();
+&lt;/script&gt;
+                </code>
+            </div>
+
+            <h3>Carousel</h3>
+            <p>Slideshows for your content:</p>
+
+            <div class="code-block">
+                <code>
+&lt;div id="myCarousel" class="carousel slide" data-bs-ride="carousel"&gt;
+    &lt;div class="carousel-inner"&gt;
+        &lt;div class="carousel-item active"&gt;
+            &lt;img src="image1.jpg" class="d-block w-100" alt="First slide"&gt;
+        &lt;/div&gt;
+        &lt;div class="carousel-item"&gt;
+            &lt;img src="image2.jpg" class="d-block w-100" alt="Second slide"&gt;
+        &lt;/div&gt;
+        &lt;div class="carousel-item"&gt;
+            &lt;img src="image3.jpg" class="d-block w-100" alt="Third slide"&gt;
+        &lt;/div&gt;
+    &lt;/div&gt;
+    
+    &lt;button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev"&gt;
+        &lt;span class="carousel-control-prev-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+    &lt;button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next"&gt;
+        &lt;span class="carousel-control-next-icon"&gt;&lt;/span&gt;
+    &lt;/button&gt;
+&lt;/div&gt;
+                </code>
+            </div>
+
+            <div class="joke-box">
+                <strong>Hot take:</strong> Carousels on mobile are just a way to make users play a really annoying game of "find the content". Use responsibly.
+            </div>
+
+            <h3>Offcanvas</h3>
+            <p>Slide-in panels from the side (perfect for mobile menus):</p>
+
+            <div class="code-block">
+                <code>
+&lt;button class="btn btn-primary" type="button" data-bs-toggle="offcanvas" data-bs-target="#offcanvasMenu"&gt;
+    Open Menu
+&lt;/button&gt;
+
+&lt;div class="offcanvas offcanvas-start" tabindex="-1" id="offcanvasMenu"&gt;
+    &lt;div class="offcanvas-header"&gt;
+        &lt;h5 class="offcanvas-title"&gt;Menu&lt;/h5&gt;
+        &lt;button type="button" class="btn-close" data-bs-dismiss="offcanvas"&gt;&lt;/button&gt;
+    &lt;/div&gt;
+    &lt;div class="offcanvas-body"&gt;
+        &lt;p&gt;Menu content goes here. Links, navigation, whatever you want.&lt;/p&gt;
+    &lt;/div&gt;
+&lt;/div&gt;
+                </code>
+            </div>
+        </section>
+
+        <!-- BONUS TIPS -->
+        <section>
+            <h2>Final Boss Tips</h2>
+            
+            <h3>Customization</h3>
+            <p>
+                Bootstrap looks good out of the box, but you can (and should) customize it. Override the default styles with your own CSS:
+            </p>
+
+            <div class="code-block">
+                <code>
+/* Put this AFTER the Bootstrap CSS link */
+.btn-primary {
+    background-color: #your-brand-color;
+    border-color: #your-brand-color;
+}
+
+.btn-primary:hover {
+    background-color: #darker-shade;
+    border-color: #darker-shade;
+}
+                </code>
+            </div>
+
+            <h3>Common Mistakes to Avoid</h3>
+            <div class="warning">
+                <strong>L's to avoid:</strong>
+                <ul style="margin-top: 10px; padding-left: 20px;">
+                    <li>Forgetting to include the JavaScript bundle when using interactive components</li>
+                    <li>Not wrapping columns in a row div (Bootstrap will be mad)</li>
+                    <li>Using too many container-fluid divs (your site will look stretched out and sad)</li>
+                    <li>Overriding Bootstrap classes instead of extending them</li>
+                    <li>Not testing on mobile (half your users are on their phones rn)</li>
+                </ul>
+            </div>
+
+            <h3>Resources</h3>
+            <p>Want to dive deeper? Check these out:</p>
+            <ul style="padding-left: 30px;">
+                <li>Official Bootstrap Docs: <a href="https://getbootstrap.com" style="color: var(--accent);">getbootstrap.com</a></li>
+                <li>Bootstrap Icons: <a href="https://icons.getbootstrap.com" style="color: var(--accent);">icons.getbootstrap.com</a></li>
+                <li>Bootstrap Themes: <a href="https://themes.getbootstrap.com" style="color: var(--accent);">themes.getbootstrap.com</a></li>
+            </ul>
+
+            <div class="tip">
+                <strong>Ultimate pro tip:</strong> Don't just copy-paste code. Actually understand what each class does. Future you will thank present you when debugging at 2am.
+            </div>
+
+            <div class="joke-box">
+                <strong>Bootstrap journey:</strong><br>
+                Day 1: "Wow, this is so easy!"<br>
+                Week 1: "I'm basically a senior developer now"<br>
+                Month 1: "Wait, I should probably learn actual CSS..."<br>
+                Year 1: "Bootstrap + Custom CSS = Chef's kiss"
+            </div>
+        </section>
+
+        <!-- QUICK REFERENCE -->
+        <section>
+            <h2>Quick Reference Cheat Sheet</h2>
+            <p>Screenshot this or bookmark it. You'll need it:</p>
+
+            <h3>Most Used Classes</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>What You Want</th>
+                        <th>Class to Use</th>
+                        <th>Notes</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Center something</td>
+                        <td><code>mx-auto</code></td>
+                        <td>Works on block elements with defined width</td>
+                    </tr>
+                    <tr>
+                        <td>Add space around</td>
+                        <td><code>m-3</code> or <code>p-3</code></td>
+                        <td>Margin or padding, size 0-5</td>
+                    </tr>
+                    <tr>
+                        <td>Make responsive</td>
+                        <td><code>col-md-6</code></td>
+                        <td>Changes at different screen sizes</td>
+                    </tr>
+                    <tr>
+                        <td>Hide on mobile</td>
+                        <td><code>d-none d-md-block</code></td>
+                        <td>Hidden until medium screens</td>
+                    </tr>
+                    <tr>
+                        <td>Full width button</td>
+                        <td><code>btn w-100</code></td>
+                        <td>Combines button style + full width</td>
+                    </tr>
+                    <tr>
+                        <td>Center text</td>
+                        <td><code>text-center</code></td>
+                        <td>Simple and effective</td>
+                    </tr>
+                    <tr>
+                        <td>Flexbox container</td>
+                        <td><code>d-flex</code></td>
+                        <td>Unlocks all flex utilities</td>
+                    </tr>
+                    <tr>
+                        <td>Rounded corners</td>
+                        <td><code>rounded</code></td>
+                        <td>Add numbers 0-3 for more/less</td>
+                    </tr>
+                    <tr>
+                        <td>Shadow effect</td>
+                        <td><code>shadow</code></td>
+                        <td>Instant depth</td>
+                    </tr>
+                    <tr>
+                        <td>Sticky navbar</td>
+                        <td><code>sticky-top</code></td>
+                        <td>Stays at top when scrolling</td>
+                    </tr>
+                </tbody>
+            </table>
+
+            <h3>Color Classes Quick Reference</h3>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Color</th>
+                        <th>Text Class</th>
+                        <th>Background Class</th>
+                        <th>Vibe</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <td>Primary</td>
+                        <td><code>text-primary</code></td>
+                        <td><code>bg-primary</code></td>
+                        <td>Main character</td>
+                    </tr>
+                    <tr>
+                        <td>Secondary</td>
+                        <td><code>text-secondary</code></td>
+                        <td><code>bg-secondary</code></td>
+                        <td>Supporting role</td>
+                    </tr>
+                    <tr>
+                        <td>Success</td>
+                        <td><code>text-success</code></td>
+                        <td><code>bg-success</code></td>
+                        <td>W energy</td>
+                    </tr>
+                    <tr>
+                        <td>Danger</td>
+                        <td><code>text-danger</code></td>
+                        <td><code>bg-danger</code></td>
+                        <td>Red flag alert</td>
+                    </tr>
+                    <tr>
+                        <td>Warning</td>
+                        <td><code>text-warning</code></td>
+                        <td><code>bg-warning</code></td>
+                        <td>Proceed with caution</td>
+                    </tr>
+                    <tr>
+                        <td>Info</td>
+                        <td><code>text-info</code></td>
+                        <td><code>bg-info</code></td>
+                        <td>FYI vibes</td>
+                    </tr>
+                </tbody>
+            </table>
+        </section>
+    </div>
+
+    <footer>
+        <p style="font-size: 1.2rem; margin-bottom: 10px;">
+            <strong>You made it to the end!</strong>
+        </p>
+        <p>
+            Now go forth and build something that slaps. Remember: Bootstrap is a tool, not a crutch. 
+            Use it wisely, customize it heavily, and always write semantic HTML.
+        </p>
+        <p style="margin-top: 20px; opacity: 0.7;">
+            Made with coffee and late-night coding sessions<br>
+            Last updated: When Bootstrap 5 was still the new hotness
+        </p>
+        <div class="joke-box" style="max-width: 600px; margin: 20px auto;">
+            <strong>Debugging tip:</strong> If your Bootstrap code isn't working, try these in order:
+            <ol style="margin-top: 10px; text-align: left; padding-left: 40px;">
+                <li>Check if you included Bootstrap CSS</li>
+                <li>Check if you included Bootstrap JS</li>
+                <li>Check the console for errors</li>
+                <li>Google it</li>
+                <li>Ask ChatGPT (you're probably here from there anyway)</li>
+                <li>Take a break, touch grass</li>
+                <li>Come back and notice the typo in your class name</li>
+            </ol>
+        </div>
+    </footer>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js"></script>
+</body>
+</html>
