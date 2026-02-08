@@ -1,0 +1,47 @@
+@import "tailwindcss";
+
+/* Dark mode variant */
+@custom-variant dark (&:where(.dark, .dark *));
+
+/* Theme configuration */
+@theme {
+  /* Custom breakpoints */
+  --breakpoint-sm: 700px;
+  --breakpoint-lg: 900px;
+  
+  /* Custom spacing */
+  --padding-sai: 100px;
+  --margin-m-sai: 100px;
+}
+
+/* Base layer for custom elements and utilities */
+@layer base {
+  /* Custom sai element */
+  sai {
+    @apply text-9xl font-extrabold text-blue-900 block;
+  }
+  
+  /* Custom sony element with traditional CSS */
+  sony {
+    display: block;
+    padding: 100px;
+    margin: 100px 0;
+    border-radius: 280px;
+    background-color: pink;
+    text-align: center;
+    font-weight: bold;
+  }
+  
+  /* Reusable button base class */
+  .btn {
+    @apply px-4 py-2 bg-slate-400 hover:bg-slate-800 
+           border border-black rounded-lg
+           transition-colors duration-200
+           font-medium cursor-pointer;
+  }
+  
+  /* Button variant */
+  .btn-blue {
+    @apply bg-blue-400 text-white hover:bg-blue-600;
+  }
+}
