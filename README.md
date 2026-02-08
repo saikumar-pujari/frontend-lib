@@ -5,6 +5,7 @@ This repository focuses on creating **reusable, scalable, and clean UI component
 
 Currently, the library is **Tailwind CSS–based**, with **Bootstrap components planned within the next 2 weeks**, and more UI frameworks to be added in the future.
 
+### the bootstrap is a file which re-useable code only!! they are bunch of re-usable codes only! 
 ---
 
 ## 🎯 Goal of This Repository
@@ -23,7 +24,7 @@ Currently, the library is **Tailwind CSS–based**, with **Bootstrap components 
 - **Tailwind CSS** (utility-first styling)
 - **JavaScript (ES6+)**
 - **Node.js & npm**
-- **Bootstrap** *(coming soon)*
+- **Bootstrap** *(docs with proper use-case only)*
 
 ---
 
